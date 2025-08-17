@@ -1,66 +1,324 @@
-<header>
-  <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
-  </h2>
 
-  <div class="header__menu">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
 
-  <div class="header__icons">
-    {% if shop.customer_accounts_enabled %}
-      {{ 'icon-account.svg' | inline_asset_content | link_to: routes.account_url }}
-    {% endif %}
+<script>
+  console.log( "hell")
+</script>
+<header
+  class="header-section"
+>
+  <div class=" flex justify-between w-full items-center">
+    <!-- Logo -->
+    <div class="flex items-center gap-2">
 
-    <a href="{{ routes.cart_url }}">
-      {% if cart.item_count > 0 %}
-        <sup>{{ cart.item_count }}</sup>
-      {% endif %}
+      <button
+      id="menu-button"
 
-      {{ 'icon-cart.svg' | inline_asset_content }}
-    </a>
+      class="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 px-2 py-2 rounded-md transition-colors duration-200"
+      aria-label="Open menu"
+      >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"></path>
+        </svg>
+        </button>
+        
+        {% if section.settings.logo %}
+          <div class="logo   ">
+            {{ section.settings.logo | image_url: width: 200 | image_tag: alt: shop.name, style: ' object-fit: cover;' }}
+            </div>
+            {% else %}
+            <h1 class="site-title">{{ shop.name }}</h1>
+          {% endif %}
+          
+          </div>
+    <!-- Dynamic Navigation -->
+
+    <nav class="main-navigation md:block hidden " role="navigation" aria-label="Main navigation">
+      {% assign navigation_item = section.blocks | where: 'type', 'navigation_item' %}
+      <ul class="nav-list flex justify-items-center">
+        {% for item in navigation_item %}
+          <li class="nav-item" {{ navigation_item.shopify_attributes }}>
+            <a
+              href="{{ item.settings.page.url | default: '#' }}"
+              class="nav-link"
+            >
+              <script>
+                console.log("{{ item.settings.page.url | default: '#' }}");
+              </script>
+              {{ item.settings.link_text | default: 'Navigation Item' }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+    <div class="flex items-center gap-4">
+      <input type="text" id="nav-toggle" class="nav bg-gray-100 px-2 py-1 rounded-xl" placeholder="serch...">
+      <button
+        id="cart-button"
+        class="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 px-2 py-2 rounded-md transition-colors duration-200"
+        aria-label="Open cart"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"></path>
+        </svg>
+      </button>
+    </div>
   </div>
 </header>
 
-{% stylesheet %}
-  header {
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+{% render  "cart-drawer"    %}
+
+{% render  "menu-drawer"  , hello : section.settings %}
+<style>
+  .header-section {
+    border:  apx solid {{ section.settings.border_color | default: '#e5e5e5' }};
+    background: {{ section.settings.background_color | default: '#feefff' }};
+    border-bottom: 1px solid {{ section.settings.border_color | default: '#e5e5e5' }};
+    padding: {{ section.settings.padding_vertical | default: 16 }}px {{ section.settings.padding_horizontal | default: 16 }}px;
   }
-  header a {
-    position: relative;
-    text-decoration: none;
-    color: var(--color-foreground);
+
+
+  .logo img {
+    max-height:{{ section.settings.logo_height | default: 60 }}px ;
+    max-width:{{ section.settings.logo_height | default: 60 }}px ;
   }
-  header a sup {
-    position: absolute;
-    left: 100%;
-    overflow: hidden;
-    max-width: var(--page-margin);
+
+  .site-title {
+
+    color: {{ section.settings.text_color | default: '#333333' }};
   }
-  header svg {
-    width: 2rem;
+
+  .nav-list {
+
+    gap: {{ section.settings.nav_spacing | default: 30 }}px;
   }
-  header .header__menu,
-  header .header__icons {
-    display: flex;
-    gap: 1rem;
+
+  .nav-link {
+
+    color: {{ section.settings.text_color | default: '#333333' }};
+    font-weight: {{ section.settings.font_weight | default: 500 }};
+    font-size: {{ section.settings.font_size | default: 16 }}px;
+
   }
-{% endstylesheet %}
+
+  .nav-link:hover {
+
+    color: {{ section.settings.hover_color | default: '#007bff' }};
+  }
+</style>
+
 
 {% schema %}
 {
-  "name": "t:general.header",
+  "name": "Dynamic Header",
+  "class": "header-section",
   "settings": [
     {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
+      "type": "header",
+      "content": "Logo Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo Height (px)",
+      "min": 30,
+      "max": 120,
+      "step": 5,
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "hover_color",
+      "label": "Hover Color",
+      "default": "#007bff"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "label": "Vertical Padding (px)",
+      "min": 10,
+      "max": 50,
+      "step": 2,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "horizontal Padding (px)",
+      "min": 10,
+      "max": 50,
+      "step": 2,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "nav_spacing",
+      "label": "Navigation Item Spacing (px)",
+      "min": 15,
+      "max": 50,
+      "step": 5,
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font Size (px)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font Weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "500"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "navigation_item",
+      "name": "Navigation Link",
+      "settings": [
+        {
+          "type": "page",
+          "id": "page",
+          "label": "Select Page"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link Text",
+          "placeholder": "Enter link text"
+        }
+      ]
+    },
+
+    {
+      "type": "dropdown_menu",
+      "name": "Dropdown Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "dropdown_title",
+          "label": "Dropdown Title",
+          "default": "Categories"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown Items (up to 5)"
+        },
+        {
+          "type": "page",
+          "id": "dropdown_page_1",
+          "label": "Page 1"
+        },
+        {
+          "type": "text",
+          "id": "dropdown_text_1",
+          "label": "Text 1"
+        },
+        {
+          "type": "page",
+          "id": "dropdown_page_2",
+          "label": "Page 2"
+        },
+        {
+          "type": "text",
+          "id": "dropdown_text_2",
+          "label": "Text 2"
+        },
+        {
+          "type": "page",
+          "id": "dropdown_page_3",
+          "label": "Page 3"
+        },
+        {
+          "type": "text",
+          "id": "dropdown_text_3",
+          "label": "Text 3"
+        },
+        {
+          "type": "page",
+          "id": "dropdown_page_4",
+          "label": "Page 4"
+        },
+        {
+          "type": "text",
+          "id": "dropdown_text_4",
+          "label": "Text 4"
+        },
+        {
+          "type": "page",
+          "id": "dropdown_page_5",
+          "label": "Page 5"
+        },
+        {
+          "type": "text",
+          "id": "dropdown_text_5",
+          "label": "Text 5"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dynamic Header",
+      "blocks": [
+        {
+          "type": "navigation_item",
+          "settings": {
+            "link_text": "New & Featured"
+          }
+        },
+        {
+          "type": "navigation_item",
+          "settings": {
+            "link_text": "Men"
+          }
+        },
+        {
+          "type": "navigation_item",
+          "settings": {
+            "link_text": "Women"
+          }
+        }
+      ]
     }
   ]
 }
 {% endschema %}
+
+

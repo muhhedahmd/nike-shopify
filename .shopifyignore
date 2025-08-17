@@ -11,3 +11,8 @@
 #
 # Ignore templates and sections with a regular expression:
 #   /(templates|sections)/.*\.json/
+
+
+pakage.json
+pakage-lock.json
+node_modules

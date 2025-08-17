@@ -1,0 +1,223 @@
+{% if section.settings.show_announcement %}
+  <section 
+    id="announcement-bar-{{ section.id }}"
+    style="background-color: {{ section.settings.background_color | default: '#f3f3f3' }}; color: {{ section.settings.text_color | default: '#000000' }};"
+    class="announcement-bar w-full relative"
+    role="banner"
+    aria-label="Announcement"
+  >
+    <div class=" flex justify-between items-center px-4 py-3 md:px-6">
+      
+      <!-- Left side - Images/Icons -->
+      <div class="flex items-center gap-3">
+        {% if section.settings.first_image != blank %}
+          <div class="flex-shrink-0">
+            {{
+              section.settings.first_image
+              | image_url: width: 100, height: 100
+              | image_tag: 
+                style: 'width: 2.5rem; height: 2.5rem; object-fit: contain;',
+                alt: section.settings.first_image.alt | default: 'Announcement icon',
+                loading: 'lazy'
+            }}
+          </div>
+        {% endif %}
+        
+        {% if section.settings.second_image != blank %}
+          <div class="flex-shrink-0">
+            {{
+              section.settings.second_image
+              | image_url: width: 100, height: 100
+              | image_tag: 
+                style: 'width: 2.5rem; height: 2.5rem; object-fit: contain;',
+                alt: section.settings.second_image.alt | default: 'Announcement icon',
+                loading: 'lazy'
+            }}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Center - Announcement Text -->
+      {% if section.settings.announcement_text != blank %}
+        <div class="flex-1 text-center px-4">
+          <p class="text-sm md:text-base font-medium">
+            {{ section.settings.announcement_text }}
+          </p>
+        </div>
+      {% endif %}
+
+      <!-- Right side - Navigation Links -->
+      <div class="flex items-center gap-4">
+        {% if section.settings.help_page != blank %}
+          <a 
+            href="{{ pages[section.settings.help_page].url | default: '#' }}"
+            class="text-sm hover:underline transition-all duration-200 font-medium"
+            aria-label="Get help"
+          >
+            {{ section.settings.help_text | default: 'Help' }}
+          </a>
+        {% endif %}
+
+        {% if section.settings.account_page != blank %}
+          <a 
+            href="{{ pages[section.settings.account_page].url | default: '/account' }}"
+            class="text-sm hover:underline transition-all duration-200 font-medium"
+            aria-label="Access your account"
+          >
+            {{ section.settings.account_text | default: 'Account' }}
+          </a>
+        {% endif %}
+
+        {% if section.settings.custom_link_page != blank %}
+          <a 
+            href="{{ pages[section.settings.custom_link_page].url | default: '#' }}"
+            class="text-sm hover:underline transition-all duration-200 font-medium"
+          >
+            {{ section.settings.custom_link_text | default: 'Learn More' }}
+          </a>
+        {% endif %}
+
+        <!-- Close button (optional) -->
+        {% if section.settings.show_close_button %}
+          <button 
+            type="button"
+            class="ml-2 text-lg leading-none hover:opacity-70 transition-opacity duration-200"
+            onclick="document.getElementById('announcement-bar-{{ section.id }}').style.display='none'"
+            aria-label="Close announcement"
+          >
+            ×
+          </button>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Optional bottom border -->
+    {% if section.settings.show_border %}
+      <div class="border-b border-current opacity-20"></div>
+    {% endif %}
+  </section>
+
+  <!-- Add some basic responsive styles -->
+ 
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "class": "announcement-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Visibility Settings"
+    },
+    {
+      "type": "checkbox",
+      "label": "Show announcement bar",
+      "id": "show_announcement",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "label": "Show close button",
+      "id": "show_close_button",
+      "default": false,
+      "info": "Allow customers to dismiss the announcement"
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "textarea",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "Free shipping on orders over $50!",
+      "info": "Main announcement message"
+    },
+    {
+      "type": "header",
+      "content": "Design Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f3f3f3"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "checkbox",
+      "label": "Show bottom border",
+      "id": "show_border",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Images/Icons"
+    },
+    {
+      "type": "image_picker",
+      "label": "First image/icon",
+      "id": "first_image",
+      "info": "Recommended size: 100x100px"
+    },
+    {
+      "type": "image_picker",
+      "label": "Second image/icon",
+      "id": "second_image",
+      "info": "Recommended size: 100x100px"
+    },
+    {
+      "type": "header",
+      "content": "Navigation Links"
+    },
+    {
+      "type": "page",
+      "id": "help_page",
+      "label": "Help page",
+      "info": "Select a page for the help link"
+    },
+    {
+      "type": "text",
+      "id": "help_text",
+      "label": "Help link text",
+      "default": "Help"
+    },
+    {
+      "type": "page",
+      "id": "account_page",
+      "label": "Account page",
+      "info": "Select a page for the account link"
+    },
+    {
+      "type": "text",
+      "id": "account_text",
+      "label": "Account link text",
+      "default": "Account"
+    },
+    {
+      "type": "page",
+      "id": "custom_link_page",
+      "label": "Custom link page",
+      "info": "Optional third link"
+    },
+    {
+      "type": "text",
+      "id": "custom_link_text",
+      "label": "Custom link text",
+      "default": "Learn More"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar",
+      "category": "Header"
+    }
+  ]
+}
+{% endschema %}

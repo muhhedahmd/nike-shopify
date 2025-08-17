@@ -11,12 +11,106 @@
   "type": "header",
   "name": "t:general.header",
   "sections": {
+    "announcment_bar_4HcXFR": {
+      "type": "announcment-bar",
+      "name": "Announcment Bar Template",
+      "settings": {
+        "show_announcement": true,
+        "show_close_button": true,
+        "announcement_text": "Free shipping on orders over $50!",
+        "background_color": "#f3f3f3",
+        "text_color": "#000000",
+        "show_border": false,
+        "first_image": "shopify://shop_images/placeholder.jpg",
+        "second_image": "shopify://shop_images/placeholder.jpg",
+        "help_page": "contact",
+        "help_text": "Help",
+        "account_page": "contact",
+        "account_text": "Account",
+        "custom_link_page": "contact",
+        "custom_link_text": "Learn More"
+      }
+    },
     "header": {
       "type": "header",
-      "settings": {}
+      "blocks": {
+        "navigation_item_DYbYzC": {
+          "type": "navigation_item",
+          "settings": {
+            "page": "contact",
+            "link_text": "feature & new"
+          }
+        },
+        "navigation_item_n8NVBh": {
+          "type": "navigation_item",
+          "settings": {
+            "page": "",
+            "link_text": "Kids"
+          }
+        },
+        "navigation_item_TgLPbe": {
+          "type": "navigation_item",
+          "settings": {
+            "page": "",
+            "link_text": "Women"
+          }
+        },
+        "navigation_item_8tWQGf": {
+          "type": "navigation_item",
+          "settings": {
+            "page": "contact",
+            "link_text": "Men"
+          }
+        },
+        "dropdown_menu_VjPJqp": {
+          "type": "dropdown_menu",
+          "settings": {
+            "dropdown_title": "Categories",
+            "dropdown_page_1": "contact",
+            "dropdown_text_1": "hello",
+            "dropdown_page_2": "",
+            "dropdown_text_2": "hello 2",
+            "dropdown_page_3": "",
+            "dropdown_text_3": "",
+            "dropdown_page_4": "",
+            "dropdown_text_4": "",
+            "dropdown_page_5": "",
+            "dropdown_text_5": ""
+          }
+        },
+        "navigation_item_UrcGYB": {
+          "type": "navigation_item",
+          "settings": {
+            "page": "",
+            "link_text": "Sales"
+          }
+        }
+      },
+      "block_order": [
+        "navigation_item_DYbYzC",
+        "navigation_item_n8NVBh",
+        "navigation_item_TgLPbe",
+        "navigation_item_8tWQGf",
+        "dropdown_menu_VjPJqp",
+        "navigation_item_UrcGYB"
+      ],
+      "settings": {
+        "logo": "shopify://shop_images/placeholder.jpg",
+        "logo_height": 35,
+        "background_color": "#ffffff",
+        "text_color": "#333333",
+        "hover_color": "#007bff",
+        "border_color": "#ffffff",
+        "padding_vertical": 14,
+        "padding_horizontal": 14,
+        "nav_spacing": 20,
+        "font_size": 15,
+        "font_weight": "700"
+      }
     }
   },
   "order": [
+    "announcment_bar_4HcXFR",
     "header"
-  ],
+  ]
 }

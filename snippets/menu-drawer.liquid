@@ -1,0 +1,64 @@
+
+
+
+{{
+    hello
+}}
+<!-- menu Overlay -->
+<div 
+  id="menu-overlay" 
+  class="fixed inset-0 bg-black bg-opacity-50 z-40 opacity-0 invisible transition-all duration-300"
+></div>
+
+<aside
+  id="menu-drawer"
+  class="fixed top-0 left-0 w-96 max-w-[90vw] h-full bg-white z-50 shadow-xl transform translate-x-full transition-transform duration-300 overflow-y-auto"
+  aria-label="Shopping menu"
+>
+  <!-- menu header with Tailwind classes -->
+  <div class="flex justify-between items-center p-6 border-b border-gray-200">
+    <h2 class="text-xl font-semibold text-gray-900">Shopping menu</h2>
+    <button 
+      id="menu-close-button" 
+      class="w-8 h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full transition-colors duration-200"
+      aria-label="Close menu"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- menu content with Tailwind styling -->
+  <div class="p-6">
+
+    <div id="menu-items" class="space-y-4">
+      <!-- menu items will be populated here -->
+      <div class="text-center py-8">
+        <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"></path>
+        </svg>
+        <p class="text-gray-500 text-lg">Your menu is empty</p>
+        <p class="text-gray-400 text-sm mt-2">Add some products to get started</p>
+      </div>
+    </div>
+
+    <!-- menu footer with checkout button -->
+    <div class="mt-8 pt-6 border-t border-gray-200">
+{% comment %}     
+        {% for item in product %}
+            <div>
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-lg font-medium text-gray-900">{{ product.title }}</span>
+                    ${{ item.featured_image | asset_url |  image_tag }}
+                </div>
+               
+            </div>                    
+        {% endfor %} {% endcomment %}
+    
+    </div>
+  </div>
+</aside>
+
+
+
