@@ -6,9 +6,7 @@ class  MenuDrawer {
     this.closeButton = this.root.querySelector("#menu-close-button")
     this.drawer = this.root.querySelector("#menu-drawer")
     this.overlay = this.root.querySelector("#menu-overlay")
-    console.log("Menu Drawer initialized" ,  {
-      THIS: this
-    })
+   
     
     if (!this.menuButton || !this.closeButton || !this.drawer || !this.overlay) {
       console.warn("Menu Drawer elements not found")
@@ -20,16 +18,16 @@ class  MenuDrawer {
 
   
   openDrawer() {
-    this.drawer.classList.remove("translate-x-full")
-    this.drawer.classList.add("translate-x-0")
+    this.drawer.classList.remove("-translate-x-full")
+    this.drawer.classList.add("-translate-x-0")
     this.overlay.classList.remove("opacity-0", "invisible")
-    this.overlay.classList.add("opacity-100", "visible")
+    this.overlay.classList.add("opacity-70", "visible")
     document.body.style.overflow = "hidden"
   }
 
   closeDrawer() {
-    this.drawer.classList.remove("translate-x-0")
-    this.drawer.classList.add("translate-x-full")
+    this.drawer.classList.remove("-translate-x-0")
+    this.drawer.classList.add("-translate-x-full")
     this.overlay.classList.remove("opacity-70", "visible")
     this.overlay.classList.add("opacity-0", "invisible")
     document.body.style.overflow = ""

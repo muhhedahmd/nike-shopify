@@ -1,0 +1,69 @@
+ {% assign section = section %}
+   {% style %}
+    
+    .header-section {
+      border:  apx solid {{ section.settings.border_color | default: '#e5e5e5' }};
+      background: {{ section.settings.background_color | default: '#feefff' }};
+      border-bottom: 1px solid {{ section.settings.border_color | default: '#e5e5e5' }};
+      padding: {{ section.settings.padding_vertical | default: 16 }}px {{ section.settings.padding_horizontal | default: 16 }}px;
+    };
+    #menu-button {}
+
+    .menu-button {
+      background-color: {{ section.settings.menu_icon_bg_color | default: '#feefff' }};
+    }
+  .menu-button:hover{
+    background-color: {{ section.settings.menu_icon_bg_color |  color_darken:  20 }};
+  }
+
+  .menu-button img , .menu-button svg {
+    width: {{ section.settings.menu_icon_size | default: 24 }}px;
+    height: {{ section.settings.menu_icon_size | default: 24 }}px;
+    color: {{ section.settings.menu_icon_color | default: '#333333' }};
+    stroke: {{ section.settings.menu_icon_color | default: '#333333' }};
+  }
+    #cart-button {}
+
+    .cart-button {
+      background-color: {{ section.settings.menu_icon_bg_color | default: '#feefff' }};
+    }
+  .cart-button:hover{
+    background-color: {{ section.settings.menu_icon_bg_color |  color_darken:  20 }};
+  }
+
+  .cart-button img , .cart-button svg {
+    width: {{ section.settings.cart_icon_size | default: 24 }}px;
+    height: {{ section.settings.cart_icon_size | default: 24 }}px;
+    color: {{ section.settings.cart_icon_color | default: '#333333' }};
+    stroke: {{ section.settings.cart_icon_color | default: '#333333' }};
+  }
+
+
+
+    .logo img {
+      max-height:{{ section.settings.logo_height | default: 60 }}px ;
+      max-width:{{ section.settings.logo_height | default: 60 }}px ;
+    }
+
+    .site-title {
+
+      color: {{ section.settings.text_color | default: '#333333' }};
+    }
+
+    .nav-list {
+      gap: {{ section.settings.nav_spacing | default: 30 }}px;
+    }
+
+    .nav-link {
+
+      color: {{ section.settings.text_color | default: '#333333' }};
+      font-weight: {{ section.settings.font_weight | default: 500 }};
+      font-size: {{ section.settings.font_size | default: 16 }}px;
+
+    }
+
+    .nav-link:hover {
+
+      color: {{ section.settings.hover_color | default: '#007bff' }};
+    }
+    {% endstyle %}

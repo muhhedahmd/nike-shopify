@@ -8,13 +8,9 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {
-    "main": {
-      "type": "product",
-      "settings": {}
-    }
+  "parent": "footer-group.json",
+  "context": {
+    "market": "eg"
   },
-  "order": [
-    "main"
-  ]
+  "sections": {}
 }

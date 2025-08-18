@@ -2,7 +2,7 @@
 
   "scripts": {
 
-    "start": "concurrently \" shopify theme dev --store=zz877x-30\" \" npx @tailwindcss/cli -i ./assets/tailwind.input.css -o ./assets/tailwind.output.css --watch\" "
+    "start": "concurrently \" shopify theme dev --store=test-store202000\" \" npx @tailwindcss/cli -i ./assets/tailwind.input.css -o ./assets/tailwind.output.css --watch\" "
 
   },
 

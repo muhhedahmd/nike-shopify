@@ -8,13 +8,9 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {
-    "main": {
-      "type": "collections",
-      "settings": {}
-    }
+  "parent": "header-group.json",
+  "context": {
+    "market": "eg"
   },
-  "order": [
-    "main"
-  ]
+  "sections": {}
 }

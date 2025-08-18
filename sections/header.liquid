@@ -1,35 +1,39 @@
-
-
-<script>
-  console.log( "hell")
-</script>
 <header
   class="header-section"
 >
   <div class=" flex justify-between w-full items-center">
     <!-- Logo -->
     <div class="flex items-center gap-2">
+      {% if section.settings.show_menu_button %}
+        <button
+          id="menu-button"
 
-      <button
-      id="menu-button"
+          class="cursor-pointer flex items-center gap-2  px-2 py-2 rounded-md transition-colors duration-200 menu-button"
+          aria-label="Open menu"
+        >
+          {% if section.settings.menu_icon %}
+            {{
+              section.settings.menu_icon
+              | image_url: width: 150, height: 150
+              | image_tag: alt: shop.name, style: ' object-fit: cover;'
+            }}
 
-      class="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 px-2 py-2 rounded-md transition-colors duration-200"
-      aria-label="Open menu"
-      >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"></path>
-        </svg>
-        </button>
-        
-        {% if section.settings.logo %}
-          <div class="logo   ">
-            {{ section.settings.logo | image_url: width: 200 | image_tag: alt: shop.name, style: ' object-fit: cover;' }}
-            </div>
-            {% else %}
-            <h1 class="site-title">{{ shop.name }}</h1>
+          {% else %}
+            <svg class="w-5 h-5 icon-menu" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"></path>
+            </svg>
           {% endif %}
-          
-          </div>
+        </button>
+      {% endif %}
+
+      {% if section.settings.logo %}
+        <div class="logo   ">
+          {{ section.settings.logo | image_url: width: 200 | image_tag: alt: shop.name, style: ' object-fit: cover;' }}
+        </div>
+      {% else %}
+        <h1 class="site-title">{{ shop.name }}</h1>
+      {% endif %}
+    </div>
     <!-- Dynamic Navigation -->
 
     <nav class="main-navigation md:block hidden " role="navigation" aria-label="Main navigation">
@@ -52,60 +56,105 @@
     </nav>
     <div class="flex items-center gap-4">
       <input type="text" id="nav-toggle" class="nav bg-gray-100 px-2 py-1 rounded-xl" placeholder="serch...">
-      <button
-        id="cart-button"
-        class="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 px-2 py-2 rounded-md transition-colors duration-200"
-        aria-label="Open cart"
-      >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"></path>
-        </svg>
-      </button>
+      {% if section.settings.show_cart_button %}
+        <button
+          id="cart-button"
+          class="cart-button flex items-center gap-2 bg-gray-200 hover:bg-gray-300 px-2 py-2 rounded-md transition-colors duration-200"
+          aria-label="Open cart"
+        >
+          {% if section.settings.cart_icon %}
+            {{
+              section.settings.cart_icon
+              | image_url: width: 150, height: 150
+              | image_tag: alt: shop.name, style: ' object-fit: cover;'
+            }}
+
+          {% else %}
+            <svg class="w-5 h-5 icon-menu" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"></path>
+            </svg>
+          {% endif %}
+        </button>
+      {% endif %}
     </div>
   </div>
 </header>
 
-{% render  "cart-drawer"    %}
+{% render 'cart-drawer' %}
 
-{% render  "menu-drawer"  , hello : section.settings %}
-<style>
-  .header-section {
-    border:  apx solid {{ section.settings.border_color | default: '#e5e5e5' }};
-    background: {{ section.settings.background_color | default: '#feefff' }};
-    border-bottom: 1px solid {{ section.settings.border_color | default: '#e5e5e5' }};
-    padding: {{ section.settings.padding_vertical | default: 16 }}px {{ section.settings.padding_horizontal | default: 16 }}px;
-  }
+{% render 'menu-drawer', hello: section.settings %}
+
+{% render "header-style" |  asset_url | section : section %}
+
+{% comment %}
+  <style>
+      .header-section {
+        border:  apx solid {{ section.settings.border_color | default: '#e5e5e5' }};
+        background: {{ section.settings.background_color | default: '#feefff' }};
+        border-bottom: 1px solid {{ section.settings.border_color | default: '#e5e5e5' }};
+        padding: {{ section.settings.padding_vertical | default: 16 }}px {{ section.settings.padding_horizontal | default: 16 }}px;
+      };
+      #menu-button {}
+
+      .menu-button {
+        background-color: {{ section.settings.menu_icon_bg_color | default: '#feefff' }};
+      }
+    .menu-button:hover{
+      background-color: {{ section.settings.menu_icon_bg_color |  color_darken:  20 }};
+    }
+
+    .menu-button img , .menu-button svg {
+      width: {{ section.settings.menu_icon_size | default: 24 }}px;
+      height: {{ section.settings.menu_icon_size | default: 24 }}px;
+      color: {{ section.settings.menu_icon_color | default: '#333333' }};
+      stroke: {{ section.settings.menu_icon_color | default: '#333333' }};
+    }
+      #cart-button {}
+
+      .cart-button {
+        background-color: {{ section.settings.menu_icon_bg_color | default: '#feefff' }};
+      }
+    .cart-button:hover{
+      background-color: {{ section.settings.menu_icon_bg_color |  color_darken:  20 }};
+    }
+
+    .cart-button img , .cart-button svg {
+      width: {{ section.settings.cart_icon_size | default: 24 }}px;
+      height: {{ section.settings.cart_icon_size | default: 24 }}px;
+      color: {{ section.settings.cart_icon_color | default: '#333333' }};
+      stroke: {{ section.settings.cart_icon_color | default: '#333333' }};
+    }
 
 
-  .logo img {
-    max-height:{{ section.settings.logo_height | default: 60 }}px ;
-    max-width:{{ section.settings.logo_height | default: 60 }}px ;
-  }
 
-  .site-title {
+      .logo img {
+        max-height:{{ section.settings.logo_height | default: 60 }}px ;
+        max-width:{{ section.settings.logo_height | default: 60 }}px ;
+      }
 
-    color: {{ section.settings.text_color | default: '#333333' }};
-  }
+      .site-title {
 
-  .nav-list {
+        color: {{ section.settings.text_color | default: '#333333' }};
+      }
 
-    gap: {{ section.settings.nav_spacing | default: 30 }}px;
-  }
+      .nav-list {
+        gap: {{ section.settings.nav_spacing | default: 30 }}px;
+      }
 
-  .nav-link {
+      .nav-link {
 
-    color: {{ section.settings.text_color | default: '#333333' }};
-    font-weight: {{ section.settings.font_weight | default: 500 }};
-    font-size: {{ section.settings.font_size | default: 16 }}px;
+        color: {{ section.settings.text_color | default: '#333333' }};
+        font-weight: {{ section.settings.font_weight | default: 500 }};
+        font-size: {{ section.settings.font_size | default: 16 }}px;
 
-  }
+      }
 
-  .nav-link:hover {
+      .nav-link:hover {
 
-    color: {{ section.settings.hover_color | default: '#007bff' }};
-  }
-</style>
-
+        color: {{ section.settings.hover_color | default: '#007bff' }};
+      }
+  </style>
+{% endcomment %}
 
 {% schema %}
 {
@@ -205,6 +254,72 @@
         { "value": "700", "label": "Bold" }
       ],
       "default": "500"
+    },
+    {
+      "type": "header",
+      "content": "Menu Button"
+    },
+    {
+      "type": "checkbox",
+      "label": "Show menu button",
+      "id": "show_menu_button",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "label": "icon for menu button",
+      "id": "menu_icon"
+    },
+    {
+      "type": "color",
+      "id": "menu_icon_color",
+      "label": "Menu Icon Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "menu_icon_bg_color",
+      "label": "Menu Icon  background Color",
+      "default": "#c4c4c4"
+    },
+    {
+      "type": "range",
+      "id": "menu_icon_size",
+      "label": "Menu Icon Size (px)",
+      "min": 15,
+      "max": 50,
+      "step": 5,
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "cart button"
+    },
+    {
+      "type": "checkbox",
+      "label": "Show cart button",
+      "id": "show_cart_button",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "label": "icon for cart button",
+      "id": "cart_icon"
+    },
+    {
+      "type": "color",
+      "id": "cart_icon_color",
+      "label": "cart Icon Color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "cart_icon_size",
+      "label": "cartIcon Size (px)",
+      "min": 15,
+      "max": 50,
+      "step": 5,
+      "default": 30
     }
   ],
   "blocks": [
@@ -291,7 +406,8 @@
           "label": "Text 5"
         }
       ]
-    }
+    },
+   
   ],
   "presets": [
     {
@@ -320,5 +436,3 @@
   ]
 }
 {% endschema %}
-
-

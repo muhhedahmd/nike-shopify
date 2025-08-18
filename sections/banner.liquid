@@ -1,15 +1,24 @@
-
-
+<div
+  class="w-screen"
+>
+  {% comment %} {% content_for 'text-block' %} {% endcomment %}
+</div>
 
 {% schema %}
 {
-    "name": "banner",
-    "settings": [
-         {
-            "type": "text" ,
-            "label": "text",
-            "id": "text-settings"
-         }
-        ]
+  "name": "Theme blocks Section",
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Theme blocks Section"
+    }
+  ]
 }
 {% endschema %}

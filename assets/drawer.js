@@ -10,13 +10,12 @@
       return
     }
 
-    console.log("Cart Drawer initialized")
 
     function openDrawer() {
       drawer.classList.remove("translate-x-full")
       drawer.classList.add("translate-x-0")
       overlay.classList.remove("opacity-0", "invisible")
-      overlay.classList.add("opacity-100", "visible")
+      overlay.classList.add("opacity-70", "visible")
       document.body.style.overflow = "hidden"
     }
 
@@ -33,6 +32,7 @@
     overlay.addEventListener("click", closeDrawer)
 
     document.addEventListener("keydown", (e) => {
+      
       if (e.key === "Escape" && !drawer.classList.contains("translate-x-full")) {
         closeDrawer()
       }

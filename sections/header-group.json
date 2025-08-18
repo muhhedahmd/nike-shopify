@@ -21,8 +21,8 @@
         "background_color": "#f3f3f3",
         "text_color": "#000000",
         "show_border": false,
-        "first_image": "shopify://shop_images/placeholder.jpg",
-        "second_image": "shopify://shop_images/placeholder.jpg",
+        "first_image": "shopify://shop_images/brand-nike-svgrepo-com.svg",
+        "second_image": "shopify://shop_images/nuclear-bomb-svgrepo-com.svg",
         "help_page": "contact",
         "help_text": "Help",
         "account_page": "contact",
@@ -95,17 +95,26 @@
         "navigation_item_UrcGYB"
       ],
       "settings": {
-        "logo": "shopify://shop_images/placeholder.jpg",
-        "logo_height": 35,
+        "logo": "shopify://shop_images/react-logo.png",
+        "logo_height": 30,
         "background_color": "#ffffff",
         "text_color": "#333333",
         "hover_color": "#007bff",
         "border_color": "#ffffff",
-        "padding_vertical": 14,
-        "padding_horizontal": 14,
-        "nav_spacing": 20,
+        "padding_vertical": 12,
+        "padding_horizontal": 12,
+        "nav_spacing": 35,
         "font_size": 15,
-        "font_weight": "700"
+        "font_weight": "700",
+        "show_menu_button": true,
+        "menu_icon": "shopify://shop_images/side-menu-svgrepo-com.svg",
+        "menu_icon_color": "#505050",
+        "menu_icon_bg_color": "#f1f1f1",
+        "menu_icon_size": 25,
+        "show_cart_button": true,
+        "cart_icon": "shopify://shop_images/cart-5-svgrepo-com.svg",
+        "cart_icon_color": "#333333",
+        "cart_icon_size": 25
       }
     }
   },

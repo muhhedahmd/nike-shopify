@@ -1,0 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "parent": "page.json",
+  "context": {
+    "market": "eg"
+  },
+  "sections": {
+    "hero_landing_hKX9e": {
+      "type": "hero-landing",
+      "disabled": false,
+      "settings": {
+        "wide_background_image": null,
+        "small_background_image": null,
+        "background_color": "#ffffff",
+        "text_color": "#333333",
+        "header-0da6c504cab2d9cb65f5b62860048464": null,
+        "button_color": "#333333",
+        "button_text": "Shop Now",
+        "header-58422ac3c579e37c9088e204f3916985": null,
+        "title": "New Arrivals"
+      },
+      "blocks": {},
+      "block_order": [],
+      "name": "hero landing Default"
+    }
+  },
+  "order": [
+    "main",
+    "hero_landing_hKX9e"
+  ]
+}

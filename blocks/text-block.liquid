@@ -1,0 +1,22 @@
+<h2>
+    {% content_for 'block', type: 'text', id: 'text' %}
+</h2>
+
+{% schema %}
+{
+  "name": "text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "text block",
+      "default": " text block"
+    }
+  ],
+  "presets": [
+    {
+      "name": "text"
+    }
+  ]
+}
+{% endschema %}

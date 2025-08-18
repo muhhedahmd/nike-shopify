@@ -1,0 +1,27 @@
+<table
+{{
+    block.shopify_attributes
+  }}
+>
+  {% content_for 'block', type: '_table-header', id: 'table-header' %}
+  <tbody>
+    {% content_for 'blocks' %}
+  </tbody>
+</table>
+
+{% schema %}
+{
+  "name": "table",
+  "blocks": [
+    {
+      "type": "_table-row"
+    }
+  ],
+  "settings": [],
+  "presets": [
+    {
+      "name": "table"
+    }
+  ]
+}
+{% endschema %}
